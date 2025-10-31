@@ -2,6 +2,10 @@ def busca_fuzzy_iter(dados, chave, termo, max_dist=2):
     """Retorna itens cujo campo 'chave' é semelhante ao termo (fuzzy search)."""
     resultados = []
     for item in dados:
+        # Otimização: Se a diferença de tamanho já é maior que a distância máxima, é impossível a distância de Levenshtein ser <= max_dist.
+        if abs(len(item[chave]) - len(termo)) > max_dist:
+            continue
+
         dist = levenshtein_distance_iter(item[chave], termo)
         if dist <= max_dist:
             resultados.append(item)
@@ -9,7 +13,9 @@ def busca_fuzzy_iter(dados, chave, termo, max_dist=2):
 
 
 def levenshtein_distance_iter(s1, s2):
-    """Calcula a distância de Levenshtein entre duas strings de forma iterativa (bottom-up)."""
+    """
+    Calcula a distância de Levenshtein entre duas strings de forma iterativa (bottom-up).
+    """
     m, n = len(s1), len(s2)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
 
@@ -30,8 +36,18 @@ def levenshtein_distance_iter(s1, s2):
 
 
 def busca_fuzzy_rec(dados, chave, termo, max_dist=2):
+    """
+    Retorna itens cujo campo 'chave' é semelhante ao termo (fuzzy search) utilizando distância de Levenshtein recursiva.
+
+    Complexidade de tempo: O(N * m * n)
+    Onde N é o número de itens em 'dados', m é o comprimento da string no campo 'chave' e n é o comprimento do 'termo'.
+    """
     resultados = []
     for item in dados:
+        # Otimização: Se a diferença de tamanho já é maior que a distância máxima, é impossível a distância de Levenshtein ser <= max_dist.
+        if abs(len(item[chave]) - len(termo)) > max_dist:
+            continue
+
         dist = levenshtein_distance_rec(item[chave], termo)
         if dist <= max_dist:
             resultados.append(item)
@@ -39,7 +55,12 @@ def busca_fuzzy_rec(dados, chave, termo, max_dist=2):
 
 
 def levenshtein_distance_rec(s1, s2):
-    """Calcula a distância de Levenshtein entre duas strings usando recursão e cache manual."""
+    """
+    Calcula a distância de Levenshtein entre duas strings usando recursão e cache manual.
+
+    Complexidade de tempo: O(m * n)
+    Complexidade de tempo sem cache: O(3^(m+n))
+    """
     cache = {}
 
     def rec(i, j):
@@ -60,3 +81,12 @@ def levenshtein_distance_rec(s1, s2):
         return result
 
     return rec(len(s1), len(s2))
+
+
+if __name__ == "__main__":
+    s1 = "Augusto"
+    s2 = "Augto"
+    iter_distance = levenshtein_distance_iter(s1, s2)
+    rec_distance = levenshtein_distance_rec(s1, s2)
+    print(f"Distância iterativa entre '{s1}' e '{s2}': {iter_distance}")
+    print(f"Distância recursiva entre '{s1}' e '{s2}': {rec_distance}")

@@ -28,7 +28,7 @@ def view_data_stack(pilha):
 def search_fuzzy(dados_consumo, max_dist=2):
     """Opção: Buscar Insumo (Fuzzy Search)"""
     nome_insumo = menu.ask_input("🔍 Digite o nome aproximado do insumo a buscar")
-    if not nome_insumo: # type: ignore
+    if not nome_insumo:  # type: ignore
         menu.show_message("❌ Nome do insumo não pode ser vazio.", "bold red")
         return
 
@@ -44,7 +44,9 @@ def search_fuzzy(dados_consumo, max_dist=2):
 
     # Versão recursiva
     resultado_rec, tempo_rec = medir_tempo(
-        lambda dados, chave, termo: dp.busca_fuzzy_rec(dados, chave, termo, max_dist=max_dist),
+        lambda dados, chave, termo: dp.busca_fuzzy_rec(
+            dados, chave, termo, max_dist=max_dist
+        ),
         dados_consumo,
         "nome_insumo",
         nome_insumo,
@@ -74,10 +76,12 @@ def search_fuzzy(dados_consumo, max_dist=2):
 
     if not resultado_iter and not resultado_rec:
         tentar_novamente = menu.ask_input(
-            "Nenhum resultado encontrado. Deseja tentar novamente?", choices=["s", "n"], default="S"
+            "Nenhum resultado encontrado. Deseja tentar novamente?",
+            choices=["s", "n"],
+            default="S",
         )
         print()
-        if tentar_novamente.lower() == "s": # type: ignore
+        if tentar_novamente.lower() == "s":  # type: ignore
             search_fuzzy(dados_consumo)
 
 
@@ -150,7 +154,7 @@ def _sort_data(dados_consumo, algoritmo, sort_function):
         "Digite o número da opção desejada",
         choices=list(chave_menu.keys()),
     )
-    chave, _ = chave_menu.get(chave_ordenacao, ("id_insumo", "ID do Insumo")) # type: ignore
+    chave, _ = chave_menu.get(chave_ordenacao, ("id_insumo", "ID do Insumo"))  # type: ignore
 
     dados_ordenados, tempo_ordenacao_formatado = medir_tempo(
         sort_function, dados_consumo, chave

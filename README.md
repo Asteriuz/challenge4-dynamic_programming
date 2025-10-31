@@ -21,9 +21,9 @@ O sistema oferece um menu com diversas opções para manipulação e visualizaç
 - **Visualização Cronológica (Fila)**: Exibe os registros de consumo na ordem em que aconteceram (FIFO - _First-In, First-Out_), simulando um log de eventos.
 - **Visualização Inversa (Pilha)**: Mostra os últimos consumos registrados primeiro (LIFO - _Last-In, First-Out_), útil para consultar as atividades mais recentes.
 - **Busca de Insumos**:
+  - **Busca Fuzzy**: Permite encontrar insumos mesmo quando o nome está digitado com erros ou aproximações, utilizando o algoritmo de distância de Levenshtein. O sistema mostra os resultados tanto pela versão iterativa quanto pela versão recursiva com cache, exibindo o tempo de execução de cada método. (Utiliza Programação Dinâmica - Método de Levenshtein)
   - **Busca Sequencial**: Permite encontrar um insumo pelo nome, percorrendo toda a lista de registros.
   - **Busca Binária**: Realiza uma busca otimizada por nome em uma lista pré-ordenada, sendo significativamente mais rápida para grandes volumes de dados.
-  - **Busca Fuzzy**: Permite encontrar insumos mesmo quando o nome está digitado com erros ou aproximações, utilizando o algoritmo de distância de Levenshtein. O sistema mostra os resultados tanto pela versão iterativa quanto pela versão recursiva com cache, exibindo o tempo de execução de cada método.
 - **Ordenação Avançada**:
   - **Merge Sort**: Organiza os dados de consumo com base em um campo escolhido (ID, nome, lote, quantidade, etc.) usando um algoritmo estável e eficiente.
   - **Quick Sort**: Oferece uma alternativa de ordenação rápida (em média) para os mesmos campos.
@@ -98,17 +98,22 @@ Você pode usar **pip** (tradicional) ou **uv** (recomendado, mais rápido e sim
 
 ## 🧠 Implementação de Estruturas e Algoritmos
 
-- **Fila e Pilha (`core/fila_pilha.py`)**:
+- **Fila e Pilha ([`core/fila_pilha.py`](core/fila_pilha.py))**:
 
   - `FilaConsumo`: Utiliza `collections.deque`, uma implementação otimizada de fila em Python, para gerenciar os dados em ordem cronológica (FIFO).
   - `PilhaConsumo`: Implementada com uma lista Python (`list`), onde `append()` e `pop()` simulam as operações de _push_ e _pop_ de uma pilha (LIFO). A visualização é feita invertendo a ordem da lista.
 
-- **Busca (`core/busca.py`)**:
+- **Busca Fuzzy (Distância de Levenshtein) ([`core/dp.py`](core/dp.py))**:
+
+  - `busca_fuzzy_levenshtein_iterativa`: Implementa a distância de Levenshtein de forma iterativa, utilizando uma matriz para calcular o número mínimo de operações necessárias para transformar uma string em outra. Tem complexidade **O(N \* m \* n)**, onde N é o número de itens na lista e m e n são os comprimentos das strings comparadas.
+  - `busca_fuzzy_levenshtein_recursiva`: Implementa a distância de Levenshtein de forma recursiva com memoização (cache) para otimizar o desempenho. Também tem complexidade **O(N \* m \* n)**, mas geralmente é mais lenta devido à sobrecarga de chamadas recursivas.
+
+- **Busca ([`core/busca.py`](core/busca.py))**:
 
   - `busca_sequencial`: Itera sobre cada item da lista, comparando o valor da chave especificada. Tem complexidade **O(n)**.
   - `busca_binaria`: Funciona em uma lista pré-ordenada, dividindo repetidamente o intervalo de busca pela metade. Tem complexidade **O(log n)**, sendo muito mais eficiente para grandes conjuntos de dados.
 
-- **Ordenação (`core/ordenacao.py`)**:
+- **Ordenação ([`core/ordenacao.py`](core/ordenacao.py))**:
   - `merge_sort`: Um algoritmo de "dividir para conquistar" que divide a lista em metades, ordena-as recursivamente e depois as mescla. Garante uma complexidade de **O(n log n)** em todos os casos.
   - `quick_sort`: Também de "dividir para conquistar", escolhe um pivô e particiona a lista. Sua complexidade média é **O(n log n)**, mas pode degradar para **O(n²)** no pior caso. A implementação aqui é _out-of-place_ para maior simplicidade.
 

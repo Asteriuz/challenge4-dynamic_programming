@@ -7,7 +7,7 @@ from utils.config.config_manager import TerminalTheme
 
 def config_menu(config_manager):
     """Exibe as configurações como uma tabela interativa e permite edição"""
-    show_message("⚙️ Configurações do Sistema", "bright_blue")
+    show_message("⚙️  Configurações do Sistema", "bright_blue")
 
     config = config_manager.config
 
