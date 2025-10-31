@@ -1,11 +1,14 @@
 from os import system, name
-from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.prompt import Prompt, IntPrompt, InvalidResponse
 from rich.text import Text
 from rich.theme import Theme
 
+from ui.console import get_console
+
+
+# ------------------------------- Custom Theme ------------------------------- #
 custom_theme = Theme(
     {
         "red": "#ff5555",
@@ -26,7 +29,15 @@ def clear_console():
         _ = system("clear")
 
 
-console = Console(theme=custom_theme)
+# ---------------------------------- Config ---------------------------------- #
+console = get_console()
+
+# ---------------------------------- Menu ----------------------------------- #
+
+
+def atualizar_console():
+    global console
+    console = get_console(force_reload=True)
 
 
 def show_main_menu(config):
@@ -82,9 +93,9 @@ class PromptPT(Prompt):
             )
 
 
-def ask_input(prompt_text="Escolha uma opção: ", choices=None):
+def ask_input(prompt_text="Escolha uma opção: ", choices=None, default=None):
     """Solicita uma entrada do usuário."""
-    return PromptPT.ask(prompt_text, choices=choices)
+    return PromptPT.ask(prompt_text, choices=choices, default=default)
 
 
 class IntPromptPT(IntPrompt):

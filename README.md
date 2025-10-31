@@ -23,6 +23,7 @@ O sistema oferece um menu com diversas opções para manipulação e visualizaç
 - **Busca de Insumos**:
   - **Busca Sequencial**: Permite encontrar um insumo pelo nome, percorrendo toda a lista de registros.
   - **Busca Binária**: Realiza uma busca otimizada por nome em uma lista pré-ordenada, sendo significativamente mais rápida para grandes volumes de dados.
+  - **Busca Fuzzy**: Permite encontrar insumos mesmo quando o nome está digitado com erros ou aproximações, utilizando o algoritmo de distância de Levenshtein. O sistema mostra os resultados tanto pela versão iterativa quanto pela versão recursiva com cache, exibindo o tempo de execução de cada método.
 - **Ordenação Avançada**:
   - **Merge Sort**: Organiza os dados de consumo com base em um campo escolhido (ID, nome, lote, quantidade, etc.) usando um algoritmo estável e eficiente.
   - **Quick Sort**: Oferece uma alternativa de ordenação rápida (em média) para os mesmos campos.
