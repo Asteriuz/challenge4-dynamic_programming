@@ -5,7 +5,7 @@
 
 ## 🌐 Link do Projeto
 
-Acesse o repositório completo no GitHub: [Asteriuz/challenge3-dynamic_programming](https://github.com/Asteriuz/challenge3-dynamic_programming)
+Acesse o repositório completo no GitHub: [Asteriuz/challenge4-dynamic_programming](https://github.com/Asteriuz/challenge4-dynamic_programming)
 
 ## 📖 Sobre o Projeto
 

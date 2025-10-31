@@ -120,6 +120,7 @@ def config_menu(config_manager):
             confirmar = Confirm.ask(
                 "[red]Tem certeza que deseja redefinir as configurações para o padrão?[/red]",
                 default=False,
+                choices=["s", "n"],
             )
             if confirmar:
                 config_manager.reset_config()
