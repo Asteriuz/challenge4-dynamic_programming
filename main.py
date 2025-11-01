@@ -12,70 +12,40 @@ MENU_CONFIG = {
             "title": "📊 VISUALIZAÇÃO DE DADOS",
             "color": "purple",
             "options": [
-                {
-                    "number": 1,
-                    "description": "Visualizar Consumo (Fila - Cronológico)",
-                },
-                {
-                    "number": 2,
-                    "description": "Visualizar Consumo (Pilha - Inverso)",
-                },
+                {"number": 1, "description": "Fila - Cronológico"},
+                {"number": 2, "description": "Pilha - Inverso"},
             ],
         },
         {
             "title": "🔍 BUSCA DE INSUMOS",
             "color": "green",
             "options": [
-                {
-                    "number": 3,
-                    "description": "Buscar Insumo (Fuzzy Search)",
-                },
-                {
-                    "number": 4,
-                    "description": "Buscar Insumo (Busca Sequencial)",
-                },
-                {
-                    "number": 5,
-                    "description": "Buscar Insumo (Busca Binária)",
-                },
+                {"number": 3, "description": "Fuzzy Search ⭐ (Programação Dinâmica)"},
+                {"number": 4, "description": "Busca Sequencial"},
+                {"number": 5, "description": "Busca Binária"},
             ],
         },
         {
             "title": "📈 ORDENAÇÃO POR CONSUMO/VALIDADE",
             "color": "yellow",
             "options": [
-                {
-                    "number": 6,
-                    "description": "(Merge Sort)",
-                },
-                {
-                    "number": 7,
-                    "description": "(Quick Sort)",
-                },
+                {"number": 6, "description": "Merge Sort"},
+                {"number": 7, "description": "Quick Sort"},
             ],
         },
         {
             "title": "🔧 GERENCIAMENTO",
             "color": "cyan",
             "options": [
-                {
-                    "number": 8,
-                    "description": "Regenerar Dados Simulados",
-                },
-                {
-                    "number": 9,
-                    "description": "Configurações do Sistema",
-                },
+                {"number": 8, "description": "Regenerar Dados Simulados"},
+                {"number": 9, "description": "Configurações do Sistema"},
             ],
         },
         {
             "title": "🚪 SISTEMA",
             "color": "red",
             "options": [
-                {
-                    "number": 10,
-                    "description": "Sair",
-                },
+                {"number": 10, "description": "Sair"},
             ],
         },
     ],
@@ -132,7 +102,9 @@ def main():
 
     while True:
         menu.show_main_menu(MENU_CONFIG)
-        opcao_input_str = "[bold green]>[/bold green] Digite o número da sua opção [bold magenta][1-9][/bold magenta]"
+        min_option = min(menu.get_valid_menu_options(MENU_CONFIG))
+        max_option = max(menu.get_valid_menu_options(MENU_CONFIG))
+        opcao_input_str = f"[bold green]>[/bold green] Digite o número da sua opção [bold magenta][{min_option}-{max_option}][/bold magenta]"
         opcao = menu.ask_input_int("\n" + opcao_input_str)
         valid_options = menu.get_valid_menu_options(MENU_CONFIG)
 

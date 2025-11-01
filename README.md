@@ -29,6 +29,18 @@ O sistema oferece um menu com diversas opções para manipulação e visualizaç
   - **Quick Sort**: Oferece uma alternativa de ordenação rápida (em média) para os mesmos campos.
 - **Persistência de Dados**: Os dados simulados são salvos em um arquivo `consumo.json`, permitindo que o estado da aplicação seja mantido entre as execuções.
 
+## ⚙️ Menu de Configurações Interativo
+
+O projeto inclui um menu de configurações interativas, que permite ao usuário visualizar e editar parâmetros do sistema de forma amigável diretamente pelo terminal. As opções disponíveis incluem:
+
+- **Tema do terminal**: Alterna entre modo colorido e sem cor para melhor acessibilidade.
+- **Modo de depuração**: Ativa/desativa mensagens detalhadas para diagnóstico.
+- **Distância máxima para busca fuzzy**: Ajusta o limite de tolerância para erros de digitação na busca por insumos.
+- **Desfazer última alteração**: Permite reverter a última modificação feita nas configurações.
+- **Redefinir configurações para padrão**: Restaura todos os parâmetros para seus valores originais.
+
+A interface exibe as opções em uma tabela estilizada e solicita ao usuário a escolha da configuração a ser alterada, validando entradas e exibindo mensagens informativas. Todas as alterações são persistidas e podem ser desfeitas, garantindo flexibilidade e segurança na personalização do sistema.
+
 ## 🚀 Tecnologias Utilizadas
 
 - **[Python 3.13+](https://www.python.org/)**: Linguagem principal do projeto.
@@ -123,14 +135,20 @@ Você pode usar **pip** (tradicional) ou **uv** (recomendado, mais rápido e sim
 .
 ├── core/               # Módulos com a lógica principal (estruturas e algoritmos)
 │   ├── busca.py
+│   ├── dp.py           # Algoritmos de Programação Dinâmica ⭐
 │   ├── fila_pilha.py
 │   └── ordenacao.py
 ├── data/               # Armazena os dados simulados
+│   ├── config.json
 │   └── consumo.json
 ├── ui/                 # Módulos responsáveis pela interface
+│   ├── config.py
+│   ├── console.py
 │   ├── menu.py
 │   └── menu_logic.py
 ├── utils/              # Módulos de utilidades
+│   ├── config/
+│   │   └── config_manager.py
 │   ├── data_manager.py
 │   └── simulador.py
 ├── .gitignore
